@@ -31,19 +31,19 @@ export class HttpClient {
   }
 
   post(url, data, options = new RequestOptions) {
-    let headers = new Headers();
+    options.headers = new Headers();
     if (/^\/api/.test(url)) this.createAuthorizationHeader(options.headers);
     return this.http.post(url, data, options);
   }
 
   put(url, data, options = new RequestOptions) {
-    let headers = new Headers();
+    options.headers = new Headers();
     if (/^\/api/.test(url)) this.createAuthorizationHeader(options.headers);
     return this.http.put(url, data, options);
   }
 
   delete(url, options = new RequestOptions) {
-    let headers = new Headers();
+    options.headers = new Headers();
     if (/^\/api/.test(url)) this.createAuthorizationHeader(options.headers);
     return this.http.delete(url, options);
   }

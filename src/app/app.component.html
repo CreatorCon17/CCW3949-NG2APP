@@ -3,8 +3,13 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h1>{{branding}}</h1></div>
     <div class="panel-body">
+      <nav>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLink="/create" routerLinkActive="active">Create</a>
+      </nav>
       <router-outlet></router-outlet>
     </div>
+    <div class="panel-footer"><div class="pull-right">This application uses the services of <a href='https://memegenerator.net' target="_blank">Meme Generator (.net)</a></div><div class="clearfix"></div></div>
   </div>
 
 </div>

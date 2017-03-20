@@ -1,0 +1,31 @@
+<h1>Create Meme</h1>
+<form #memeForm="ngForm">
+  <div class="form-group">
+    <label for="generator">Generator</label>
+    <select id="generator" class="form-control" name="generator" [(ngModel)]="meme.generator" #generator="ngModel" (change)="setPreview()">
+      <option *ngFor="let generator of memeService.generators" [value]="generator.id">{{generator.name}}</option> 
+    </select>
+  </div>
+  <div class="form-group" *ngIf="meme?.preview">
+    <label for="">Generator Preview</label>
+    <img class='preview' [src]="meme.preview"/>
+  </div>
+  <div class="form-group">
+    <label for="text0">Text Line 1</label>
+    <input type="text" class="form-control" id="text0" name="text0" [(ngModel)]="meme.text0" #text0="ngModel">
+  </div>
+  <div class="form-group">
+    <label for="text0">Text Line 2</label>
+    <input type="text" class="form-control" id="text1" name="text1" [(ngModel)]="meme.text1" #text1="ngModel">
+  </div>
+  <button type="submit" class="btn btn-success" (click)="create()">Create</button>
+</form>
+
+<div *ngIf="meme.url" class="text-center">
+  <h1>Generated Meme</h1>
+  <img [src]="meme.url" class='final'/> 
+  <div class="col-md-6 col-md-offset-3">
+    <button class="btn btn-primary" (click)="save()"><i class="glyphicon glyphicon-save"></i>Save for Later</button>
+    <button class="btn btn-success" (click)="attach()"><i class="glyphicon glyphicon-paperclip"></i>Attach to Task</button>
+  </div>
+</div>

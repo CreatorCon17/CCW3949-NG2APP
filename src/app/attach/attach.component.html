@@ -1,0 +1,25 @@
+<h1>Attach the meme</h1>
+
+<img [src]="meme" class="col-md-6 col-md-offset-3 preview">
+<div class="clearfix"></div>
+<form #taskForm="ngForm">
+  <div class="form-group">
+    <label for="table">Table</label>
+    <select name="table" id="table" class="form-control" (change)="getRecords()" [(ngModel)]="table">
+      <option value="">-- Select Task Table --</option>
+      <option value="change_request">Change Request</option>
+      <option value="incident">Incident</option>
+    </select>
+  </div> 
+  <div class="form-group">
+    <label for="fileName">File Name</label>
+    <input type="text" class="form-control" name="fileName" id="fileName" [(ngModel)]="fileName" placeholder="filanme.jpg">
+  </div>
+  <div class="form-group">
+    <label for="record">Record</label>
+    <select name="record" id="record" class="form-control" [(ngModel)]="record">
+      <option *ngFor="let record of records" [value]="record.sys_id">{{record.number}} - {{record.short_description}}</option> 
+    </select>
+  </div>
+  <button class="btn btn-primary form-control" (click)="attach()"><i class='glyphicon glyphicon-paperclip'></i> Attach</button>
+</form> 

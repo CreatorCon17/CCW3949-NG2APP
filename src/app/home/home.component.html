@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<h1 *ngIf="!memeService.memes || memeService.memes.length == 0">There are no memes yet.</h1>
+
+
+<h1 *ngIf="memeService.memes && memeService.memes.length > 0">My Memes</h1>
+<div class="col-md-3 meme" *ngFor="let meme of memeService.memes">
+  <a routerLink="/attach" [queryParams]="{url: meme}"><img src="{{meme}}" /></a>
+</div>

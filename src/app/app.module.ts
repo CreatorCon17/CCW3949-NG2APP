@@ -10,11 +10,16 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 
+import { MemeService } from './services/meme.service';
+import { CreateComponent } from './create/create.component';
+import { AttachComponent } from './attach/attach.component';
 
 const appRoutes: Routes = [
 
   // dedicated routes
   { path: '', component: HomeComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'attach', component: AttachComponent },
 
   // 404
   { path: '404', component: NotFoundComponent },
@@ -29,7 +34,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    CreateComponent,
+    AttachComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes, { useHash: true }),
@@ -38,8 +45,9 @@ const appRoutes: Routes = [
     HttpModule
   ],
   providers: [
-    HttpClient,
-    { provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' }
+    HttpClient
+    ,MemeService
+    ,{ provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' }
   ],
   bootstrap: [AppComponent]
 })
