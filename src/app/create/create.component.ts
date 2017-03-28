@@ -24,12 +24,12 @@ export class CreateComponent implements OnInit {
 
   create() {
     this.memeService.create(this.meme.generator,this.meme.text0,this.meme.text1).subscribe((response) => {
-      this.meme.url = response.json().result.instanceImageUrl;
+      this.meme.url = response.json().url;
     });
   }
 
   setPreview(){
-    this.meme.preview = this.memeService.generators.find((a)=> a.id == this.meme.generator).url;
+    this.meme.preview = this.memeService.generators.find((a)=> a.filename == this.meme.generator).url;
   }
 
   attach(){

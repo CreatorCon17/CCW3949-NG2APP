@@ -7,8 +7,9 @@ import 'rxjs/Rx';
 @Injectable()
 export class MemeService {
 
-  memes: string[];
+  memes: string[] = [];
   generators: any[] = [];
+  memeurl: string = "https://nathangrove.com/memes/";
 
   constructor(
     private http: HttpClient
@@ -18,13 +19,13 @@ export class MemeService {
   }
 
   getGenerators() {
-    this.http.get('http://version1.api.memegenerator.net/Generators_Select_ByPopular?pageIndex=0&pageSize=12&days=').subscribe((res) => {
-      let generators = res.json().result;
+    this.http.get(this.memeurl + '/backgrounds.php').subscribe((res) => {
+      let generators = res.json();
       for (var i=0; i < generators.length; i++){
         this.generators.push({
-          id: generators[i].generatorID,
-          url: generators[i].imageUrl,
-          name: generators[i].displayName
+          filename: generators[i].filename,
+          url: generators[i].url,
+          name: generators[i].name
         });
       }
       console.log(this.generators);
@@ -32,13 +33,13 @@ export class MemeService {
   };
 
   create(generatorId,text0,text1){
-    return this.http.get("http://version1.api.memegenerator.net/Instance_Create?username=ngroveknow17&password=know17!&languageCode=en&generatorID=" + generatorId + "&text0=" + text0 + "&text1=" + text1);
+    return this.http.get(this.memeurl + "/create.php?background=" + generatorId + "&text0=" + text0 + "&text1=" + text1);
   };
 
 
   attach(table,sys_id,file_name,url){
 
-    return this.http.post('/api/x_60972_memegen/attach',{
+    return this.http.post('/api/x_60972_ccw3949/attach_meme',{
       url: url,
       table: table,
       record: sys_id,
@@ -49,7 +50,7 @@ export class MemeService {
 
 
   get() {
-    this.http.get("/api/now/v1/table/x_60972_memegen_store").subscribe((res) => {
+    this.http.get("/api/now/v1/table/x_60972_ccw3949_meme_store").subscribe((res) => {
       let memes = res.json().result;
       this.memes = memes.map((a) => a.url);
     },err => console.log("No memes found"));
@@ -57,7 +58,7 @@ export class MemeService {
 
   save(url,text0,text1,generator){
     this.memes.push(url);
-    return this.http.post("/api/now/v1/table/x_60972_memegen_store",{ url: url, text0: text0, text1: text1, generator: generator });
+    return this.http.post("/api/now/v1/table/x_60972_ccw3949_meme_store",{ url: url, text0: text0, text1: text1, generator: generator });
   };
 
 }

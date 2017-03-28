@@ -3,7 +3,7 @@
   <div class="form-group">
     <label for="generator">Generator</label>
     <select id="generator" class="form-control" name="generator" [(ngModel)]="meme.generator" #generator="ngModel" (change)="setPreview()">
-      <option *ngFor="let generator of memeService.generators" [value]="generator.id">{{generator.name}}</option> 
+      <option *ngFor="let generator of memeService.generators" [value]="generator.filename">{{generator.name}}</option> 
     </select>
   </div>
   <div class="form-group" *ngIf="meme?.preview">

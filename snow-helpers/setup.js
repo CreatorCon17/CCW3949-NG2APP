@@ -108,7 +108,7 @@ function check_config(success,error,prompt_num){
     current: config.application.scope,
     properties: {
       answer: {
-        pattern: /^[a-zA-Z0-9-]+$/,
+        pattern: /^[a-zA-Z0-9-_]+$/,
         description: colors.green('Enter an application scope'),
         required: true
       }
@@ -397,7 +397,7 @@ function create_files(){
             fs.writeFile('./snow.conf.json',JSON.stringify(config,null,2),function(err){ 
                 if (err) throw err; 
 
-                console.log("Your application has been setup and is available at: https://" + config.snow.instance + "/" + config.snow.endpoint); 
+                console.log("Your application has been setup and is available at: http://" + config.snow.instance + "/" + config.snow.endpoint); 
             });
 
         });
